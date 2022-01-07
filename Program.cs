@@ -14,7 +14,7 @@ namespace MonopolyQuickConsoleGame
 
             game.StartGame();
 
-            while(game.PlayNextPlayerTurn())
+            while (game.PlayNextPlayerTurn())
             {
                 Console.ReadKey();
             }

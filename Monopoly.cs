@@ -76,7 +76,56 @@ namespace MonopolyQuickConsoleGame
             }
 
             Console.WriteLine($"{Player.Name}, it's your turn to play !");
-            int diceVal = Player.RollDices();
+
+
+            int sum = 0;
+            if (Player.Prison)
+            {
+                var dices = Player.RollDices();
+                if (Player.PrisonTurns == 2)
+                {
+                    Console.WriteLine("It's being 3 turns ! Next turn you will be out of prison !");
+                    Player.Prison = false;
+                    Player.PrisonTurns = 0;
+                }
+                else if (dices.Item1 == dices.Item2)
+                {
+                    Console.WriteLine("Same number ! Congrats, you're out of prison !");
+                    Player.Prison = false;
+                    Player.PrisonTurns = 0;
+                    Player.Position += (sum = dices.Item1 + dices.Item2);
+                }
+                else
+                {
+                    Player.PrisonTurns++;
+                    Console.WriteLine("Better luck next time !");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i == 3)
+                    {
+                        Console.WriteLine("3 times in a row ?? You're going to prison my friend !");
+                        Player.Prison = true;
+                        break;
+                    }
+                    var dices = Player.RollDices();
+
+                    sum += dices.Item1 + dices.Item2;
+
+                    if (dices.Item1 != dices.Item2)
+                    {
+                        Player.Position += sum;
+
+                        break;
+                    }
+
+                    Console.WriteLine("Wow they are the same number, how cool ?!\n");
+                }
+            }
+
 
             if (Player.Prison)
             {
@@ -84,21 +133,20 @@ namespace MonopolyQuickConsoleGame
             }
             else
             {
-                Console.WriteLine($"{Player.Name} is moving {diceVal} steps forward !\n\nHe is now on position {Player.Position}");
+                Console.WriteLine($"{Player.Name} is moving {sum} steps forward !\n\nHe is now on position {Player.Position}");
             }
 
 
             if (Player.Position == GO_TO_JAIL_POSITION)
             {
                 Console.WriteLine("Oh no, you are going to jail !");
-                Player.Position = JAIL_POSITION;
                 Player.Prison = true;
             }
 
 
             ++PlayerTurn;
 
-            Console.WriteLine();
+            Console.WriteLine("\n");
 
             return true;
         }

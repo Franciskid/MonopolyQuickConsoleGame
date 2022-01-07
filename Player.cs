@@ -25,7 +25,19 @@ namespace MonopolyQuickConsoleGame
         /// </summary>
         public int PrisonTurns { get; set; }
 
-        public bool Prison { get; set; }
+
+        private bool prison = false;
+        public bool Prison
+        {
+            get => this.prison;
+            set
+            {
+                if (value)
+                    this.position = Monopoly.JAIL_POSITION;
+
+                this.prison = value;
+            }
+        }
 
 
         public int ID { get; private set; }
@@ -37,62 +49,17 @@ namespace MonopolyQuickConsoleGame
         }
 
 
-        public int RollDices()
+        public (int, int) RollDices()
         {
-            if (Prison)
-            {
-                Console.WriteLine($"{Name} rolls the dices ...");
-                int dice1 = Rand.Next(1, 7);
-                int dice2 = Rand.Next(1, 7);
+            int dice1 = Rand.Next(1, 7);
 
-                Console.WriteLine($"  {dice1}  and  {dice2} !");
-                if (PrisonTurns == 2)
-                {
-                    Console.WriteLine("It's being 3 turns ! Next turn you will be out of prison !");
-                    Prison = false;
-                    PrisonTurns = 0;
+            int dice2 = Rand.Next(1, 7);
 
-                    return 0;
-                }
-                else if (dice1 == dice2)
-                {
-                    Console.WriteLine("Same number ! Congrats, you're out of prison !");
-                    Prison = false;
-                    PrisonTurns = 0;
-                    Position += dice1 + dice2;
-                    return dice1 + dice2;
-                }
-                else
-                {
-                    Console.WriteLine("Better luck next time !");
-                    return 0;
-                }
-            }
+            Console.WriteLine($"{Name} rolls the dices ...");
 
-            int sum = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                Console.WriteLine($"{Name} rolls the dices ...");
-                int dice1 = Rand.Next(1, 7);
-                int dice2 = Rand.Next(1, 7);
+            Console.WriteLine($"{Name} rolls {dice1}  and  {dice2} !");
 
-                sum += dice1 + dice2;
-
-                Console.WriteLine($"  {dice1}  and  {dice2} !");
-
-                if (dice1 != dice2)
-                {
-                    this.Position += sum;
-                    return sum;
-                }
-
-                Console.WriteLine("Wow they are the same number, how cool ?!\n");
-            }
-
-            Console.WriteLine("3 times in a row ?? You're going to prison my friend !");
-            this.Prison = true;
-
-            return sum;
+            return (dice1, dice2);
         }
 
         public void Reset()
