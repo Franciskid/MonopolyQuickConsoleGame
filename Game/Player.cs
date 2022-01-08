@@ -18,7 +18,7 @@ namespace MonopolyQuickConsoleGame
             get => this.position;
             set
             {
-                this.position = value % 40;
+                this.position = value % Monopoly.GAMEBOARD_SIZE;
 
                 this.State = PlayerState.NewPosition;
             }
@@ -34,11 +34,19 @@ namespace MonopolyQuickConsoleGame
             get => this.prisonTurns;
             set
             {
-                if (value != 0)
+                if (value == 0)
                 {
+                    this.prisonTurns = value;
+                }
+                else if (value <= Monopoly.MAX_TURNS_PRISON)
+                {
+                    this.prisonTurns = value;
                     this.State = PlayerState.Prison;
                 }
-                this.prisonTurns = value;
+                else
+                {
+                    this.Prison = false;
+                }
             }
         }
 
@@ -70,7 +78,7 @@ namespace MonopolyQuickConsoleGame
                 {
                     this.State = PlayerState.DicesSameValues;
 
-                    if (value == 3)
+                    if (value == Monopoly.MAX_DICE_DOUBLES_BEFORE_PRISON)
                     {
                         this.numberOfDicesSameValue = 0;
                         this.Prison = true;

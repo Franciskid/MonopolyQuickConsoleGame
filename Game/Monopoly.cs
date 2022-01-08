@@ -11,6 +11,9 @@ namespace MonopolyQuickConsoleGame
     {
         public const int JAIL_POSITION = 10;
         public const int GO_TO_JAIL_POSITION = 30;
+        public const int MAX_DICE_DOUBLES_BEFORE_PRISON = 3;
+        public const int MAX_TURNS_PRISON = 3;
+        public const int GAMEBOARD_SIZE = 40;
 
         /// <summary>
         /// Initialized by the static constructor, even before the instance constructor

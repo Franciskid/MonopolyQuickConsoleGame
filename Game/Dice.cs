@@ -8,6 +8,8 @@ namespace MonopolyQuickConsoleGame
 {
     class Dice
     {
+        public const int MAX_DICE = 6;
+
         private static Random Rand = new Random(Guid.NewGuid().GetHashCode());
 
         public int Dice1 { get; set; }
@@ -20,8 +22,8 @@ namespace MonopolyQuickConsoleGame
         /// </summary>
         public void Throw()
         {
-            Dice1 = Rand.Next(1, 3);
-            Dice2 = Rand.Next(1, 3);
+            Dice1 = Rand.Next(1, MAX_DICE + 1);
+            Dice2 = Rand.Next(1, MAX_DICE + 1);
         }
 
 
