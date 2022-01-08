@@ -28,7 +28,7 @@ namespace MonopolyQuickConsoleGame
                     break;
 
                 case PlayerState.DicesSameValues:
-                    Console.WriteLine($"{pl.Name} has {Monopoly.MAX_DICE_DOUBLES_BEFORE_PRISON + 1 - pl.NumberOfDicesSameValue} dices throws before jail !");
+                    Console.WriteLine($"{pl.Name} has {Monopoly.MAX_DICE_DOUBLES_BEFORE_PRISON - pl.NumberOfDicesSameValue} dices throws before jail !");
                     break;
 
                 case PlayerState.Moving:
