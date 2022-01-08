@@ -13,10 +13,17 @@ namespace MonopolyQuickConsoleGame
             Monopoly game = Monopoly.GetMonopolyGame();
 
             GameObserver obs = new GameObserver();
-            game.Subscribe(obs);
+            game.AddSubscriber(obs);
 
+            game.SetPlayersAmount(2);
             game.InitializeGame();
-            game.StartGame();
+
+            while (!game.GameOver)
+            {
+                game.ContinueGame(3);
+
+                game.UpdateView();
+            }
         }
     }
 }

@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    public interface IObservable
+    public abstract class Observer : IObserver
     {
-        void AddSubscriber(IObserver obs);
-
-        void RemoveSubscriber(IObserver obs);
-
-        void NotifySubscribers();
+        public abstract void Update(IObservable game);
     }
 }

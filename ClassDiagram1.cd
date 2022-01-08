@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="MonopolyQuickConsoleGame.Dice">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAABAgAAAAAAAAAAAAAQCAAAQAAAEAQAAA=</HashCode>
+      <FileName>Game\Dice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.Monopoly">
+    <Position X="8.25" Y="4.5" Width="2.5" />
+    <Members>
+      <Field Name="GAMEBOARD_SIZE" Hidden="true" />
+      <Field Name="GO_TO_JAIL_POSITION" Hidden="true" />
+      <Field Name="JAIL_POSITION" Hidden="true" />
+      <Field Name="MAX_DICE_DOUBLES_BEFORE_PRISON" Hidden="true" />
+      <Field Name="MAX_TURNS_PRISON" Hidden="true" />
+      <Method Name="NextTurn" Hidden="true" />
+      <Method Name="PressKey" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAiQBQAAAAAAMACAACIACgQABgIQAUAQMABAAgABA=</HashCode>
+      <FileName>Game\Monopoly.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="view" />
+      <Property Name="State" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Players" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.Observable">
+    <Position X="6.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAQAAIAABAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Observable\Observable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="observers" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.GameObserver">
+    <Position X="12.5" Y="5.25" Width="1.5" />
+    <AssociationLine Name="Monopoly" Type="MonopolyQuickConsoleGame.Monopoly" ManuallyRouted="true">
+      <Path>
+        <Point X="12.5" Y="5.866" />
+        <Point X="11.865" Y="5.866" />
+        <Point X="11.865" Y="7.188" />
+        <Point X="10.75" Y="7.188" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Observers\GameObserver.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Monopoly" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.Observer">
+    <Position X="13.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Observers\Observer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.PlayerObserver">
+    <Position X="15" Y="5.25" Width="1.5" />
+    <AssociationLine Name="Player" Type="MonopolyQuickConsoleGame.Player" ManuallyRouted="true">
+      <Path>
+        <Point X="15.75" Y="6.483" />
+        <Point X="15.75" Y="10.482" />
+        <Point X="5.468" Y="10.482" />
+        <Point X="5.468" Y="8.56" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Game\Observers\PlayerObserver.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.Player" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="4.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAhAIggAAAIAQAAAAAAgAGAAAEBAQAAAA=</HashCode>
+      <FileName>Game\Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="LastDice" />
+      <Property Name="State" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MonopolyQuickConsoleGame.MonopolyView">
+    <Position X="11.5" Y="9" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Game\Views\MonopolyView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MonopolyQuickConsoleGame.IObservable" Collapsed="true">
+    <Position X="6.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAIAABAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Observable\IObservable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MonopolyQuickConsoleGame.IObserver" Collapsed="true">
+    <Position X="13.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\Observers\IObserver.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MonopolyQuickConsoleGame.GameState">
+    <Position X="11.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAIAAAAAQ=</HashCode>
+      <FileName>Game\States\GameState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MonopolyQuickConsoleGame.PlayerState">
+    <Position X="1.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAABAAAAAAAAAAAGAAACAAAAgAAAAQAIAA=</HashCode>
+      <FileName>Game\States\PlayerState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

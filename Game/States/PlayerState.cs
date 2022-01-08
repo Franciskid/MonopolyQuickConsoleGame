@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    enum PlayerState
+    public enum PlayerState
     {
         Prison = 0,
         OutOfPrison = 1,

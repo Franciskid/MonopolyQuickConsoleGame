@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    interface IObserver
+    public interface IObserver
     {
         void Update(IObservable game);
     }

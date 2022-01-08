@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    class Player : IObservable
+    public class Player : Observable
     {
         private int position;
         private int prisonTurns;
@@ -126,28 +126,5 @@ namespace MonopolyQuickConsoleGame
             this.State = PlayerState.Reset;
         }
 
-
-        private List<IObserver> observers = new List<IObserver>();
-
-
-        public void Subscribe(IObserver obs)
-        {
-            Console.WriteLine($"New Observer has just subscribed to the {this.Name} updates");
-            this.observers.Add(obs);
-        }
-
-        public void Unsubscribe(IObserver obs)
-        {
-            Console.WriteLine($"{(obs as Player).Name} has just unsubscribed to the player updates");
-            this.observers.Add(obs);
-        }
-
-        public void NotifySubscribers()
-        {
-            foreach (var observer in this.observers)
-            {
-                observer.Update(this);
-            }
-        }
     }
 }

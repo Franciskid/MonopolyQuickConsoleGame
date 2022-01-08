@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    class GameObserver : IObserver
+    public class GameObserver : Observer
     {
-        public void Update(IObservable game)
+        internal Monopoly Monopoly
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public override void Update(IObservable game)
         {
             if (!(game is Monopoly monop))
                 return;

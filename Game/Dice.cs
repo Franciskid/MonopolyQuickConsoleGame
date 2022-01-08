@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    class Dice
+    public class Dice
     {
         public const int MAX_DICE = 6;
 
@@ -15,6 +15,11 @@ namespace MonopolyQuickConsoleGame
         public int Dice1 { get; set; }
 
         public int Dice2 { get; set; }
+
+
+        public bool IsSame => Dice1 == Dice2;
+
+        public int Total => Dice1 + Dice2;
 
 
         /// <summary>
@@ -26,10 +31,6 @@ namespace MonopolyQuickConsoleGame
             Dice2 = Rand.Next(1, MAX_DICE + 1);
         }
 
-
-        public bool IsSame => Dice1 == Dice2;
-
-        public int Total => Dice1 + Dice2;
 
 
         public void Reset()

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    class Monopoly : IObservable
+    public class Monopoly : Observable
     {
         public const int JAIL_POSITION = 10;
         public const int GO_TO_JAIL_POSITION = 30;
@@ -23,6 +23,7 @@ namespace MonopolyQuickConsoleGame
         private int playerTurn = 0;
         private int turn;
         private GameState state;
+        private MonopolyView view = new MonopolyView();
 
 
         /// <summary>
@@ -117,7 +118,7 @@ namespace MonopolyQuickConsoleGame
                 playerAmount = amnt;
 
                 PlayerObserver obs = new PlayerObserver();
-                this.Players.ForEach(x => x.Subscribe(obs));
+                this.Players.ForEach(x => x.AddSubscriber(obs));
             }
             else
             {
@@ -151,14 +152,17 @@ namespace MonopolyQuickConsoleGame
             this.Players?.ForEach(x => x.Reset());
         }
 
+        #endregion
+
         /// <summary>
-        /// Starts the game
+        /// Starts the game or continues to where it was.
         /// </summary>
-        public void StartGame()
+        /// <param name="breakpause">Number of turns before update</param>
+        public void ContinueGame(int breakpause)
         {
             if (!IsInitialized)
                 InitializeGame();
-
+            int max = this.Turn + breakpause;
             do
             {
                 var Player = Players[PlayerTurn];
@@ -171,10 +175,10 @@ namespace MonopolyQuickConsoleGame
 
                 PressKey("\n\nPress any key to continue to the next player turn !\n");
             }
-            while (this.NextTurn());
+            while (this.NextTurn() && (this.Turn < max || PlayerTurn == Players.Count -1));
         }
 
-        #endregion
+        public void UpdateView() => this.view.PrintGameDetails(this);
 
 
         /// <summary>
@@ -243,38 +247,12 @@ namespace MonopolyQuickConsoleGame
         }
 
 
-        #region Observers
-
-        private List<IObserver> observers = new List<IObserver>();
-
-        public void Subscribe(IObserver obs)
-        {
-            Console.WriteLine($"{obs} has just subscribed to Monopoly instance");
-            this.observers.Add(obs);
-        }
-
-        public void Unsubscribe(IObserver obs)
-        {
-            Console.WriteLine($"{obs} has just unsubscribed to Monopoly instance");
-            this.observers.Add(obs);
-        }
-
-        public void NotifySubscribers()
-        {
-            foreach (var observer in this.observers)
-            {
-                observer.Update(this);
-            }
-        }
-
-        #endregion
-
-
         private void PressKey(string message)
         {
             Console.Write(message);
             Console.ReadKey(true);
             Console.WriteLine();
         }
+
     }
 }
