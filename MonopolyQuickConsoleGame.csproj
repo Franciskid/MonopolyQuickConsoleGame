@@ -43,22 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dice.cs" />
-    <Compile Include="Observers\GameObserver.cs" />
-    <Compile Include="Observable\IObservable.cs" />
-    <Compile Include="Observable\IObserver.cs" />
-    <Compile Include="Monopoly.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Observers\PlayerObserver.cs" />
-    <Compile Include="States\PlayerState.cs" />
+    <Compile Include="Game\Dice.cs" />
+    <Compile Include="Game\Observers\GameObserver.cs" />
+    <Compile Include="Game\Observable\IObservable.cs" />
+    <Compile Include="Game\Observable\IObserver.cs" />
+    <Compile Include="Game\Monopoly.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\Observers\PlayerObserver.cs" />
+    <Compile Include="Game\States\PlayerState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\GameState.cs" />
+    <Compile Include="Game\States\GameState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

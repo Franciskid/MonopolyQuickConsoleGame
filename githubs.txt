@@ -1,5 +1,0 @@
-Monopoly Games
-
-
-https://github.com/ambreine31/MonopolyProject
-https://github.com/finaldzn/MONOPOLY
