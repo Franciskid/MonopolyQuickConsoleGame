@@ -3,19 +3,21 @@
   <Class Name="MonopolyQuickConsoleGame.Monopoly">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAgiAAAAAAAAAAAAAACAAAgQAAgAABQAAAAAAAgAAA=</HashCode>
+      <HashCode>QAAoiAAQAAAAAAMACAACAACgQQBiAQAQQAIABAAgABA=</HashCode>
       <FileName>Monopoly.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Property Name="Players" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MonopolyQuickConsoleGame.Player">
     <Position X="4.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAhAIgAAAAIAQAAAAAAAAABAAEAAQAAAA=</HashCode>
+      <HashCode>AAAIAAAABAAAhAIggAAAIAQAAQACAgAAQAAEBAQAAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MonopolyQuickConsoleGame.Program">
     <Position X="3.25" Y="5.25" Width="1.5" />

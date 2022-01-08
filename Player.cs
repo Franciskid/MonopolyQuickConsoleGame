@@ -6,16 +6,22 @@ using System.Threading.Tasks;
 
 namespace MonopolyQuickConsoleGame
 {
-    class Player
+    class Player : IObservable
     {
-        private static Random Rand = new Random(Guid.NewGuid().GetHashCode());
-
         private int position;
+        private int prisonTurns;
+        private int numberOfDicesSameValue;
+        private PlayerState state;
 
         public int Position
         {
             get => this.position;
-            set => this.position = value % 40;
+            set
+            {
+                this.position = value % 40;
+
+                this.State = PlayerState.NewPosition;
+            }
         }
 
         public string Name { get; private set; }
@@ -23,24 +29,72 @@ namespace MonopolyQuickConsoleGame
         /// <summary>
         /// Amount of turns since in prison.
         /// </summary>
-        public int PrisonTurns { get; set; }
-
-
-        private bool prison = false;
-        public bool Prison
+        public int PrisonTurns
         {
-            get => this.prison;
+            get => this.prisonTurns;
             set
             {
-                if (value)
-                    this.position = Monopoly.JAIL_POSITION;
-
-                this.prison = value;
+                if (value != 0)
+                {
+                    this.State = PlayerState.Prison;
+                }
+                this.prisonTurns = value;
             }
         }
 
 
-        public int ID { get; private set; }
+        public bool Prison
+        {
+            get => this.prisonTurns != 0;
+            set
+            {
+                if (value)
+                {
+                    this.position = Monopoly.JAIL_POSITION;
+                    this.PrisonTurns = 1;
+                }
+                else
+                {
+                    this.prisonTurns = 0;
+                    this.State = PlayerState.OutOfPrison;
+                }
+            }
+        }
+        public int NumberOfDicesSameValue
+        {
+            get => this.numberOfDicesSameValue;
+            set
+            {
+                this.numberOfDicesSameValue = value;
+                if (value != 0)
+                {
+                    this.State = PlayerState.DicesSameValues;
+
+                    if (value == 3)
+                    {
+                        this.numberOfDicesSameValue = 0;
+                        this.Prison = true;
+                    }
+                }
+            }
+        }
+
+        public Dice LastDice { get; } = new Dice();
+
+
+        public int ID { get; }
+
+        public PlayerState State
+        {
+            get => this.state;
+            set
+            {
+                this.state = value;
+                NotifySubscribers();
+            }
+        }
+
+
 
         public Player(string name, int id)
         {
@@ -49,24 +103,43 @@ namespace MonopolyQuickConsoleGame
         }
 
 
-        public (int, int) RollDices()
+        public void RollDices()
         {
-            int dice1 = Rand.Next(1, 7);
-
-            int dice2 = Rand.Next(1, 7);
-
-            Console.WriteLine($"{Name} rolls the dices ...");
-
-            Console.WriteLine($"{Name} rolls {dice1}  and  {dice2} !");
-
-            return (dice1, dice2);
+            LastDice.Throw();
+            this.State = PlayerState.ThrowDices;
         }
 
         public void Reset()
         {
-            this.Position = 0;
-            this.PrisonTurns = 0;
+            this.position = 0;
             this.Prison = false;
+            this.LastDice.Reset();
+
+            this.State = PlayerState.Reset;
+        }
+
+
+        private List<IObserver> observers = new List<IObserver>();
+
+
+        public void Subscribe(IObserver obs)
+        {
+            Console.WriteLine($"New Observer has just subscribed to the {this.Name} updates");
+            this.observers.Add(obs);
+        }
+
+        public void Unsubscribe(IObserver obs)
+        {
+            Console.WriteLine($"{(obs as Player).Name} has just unsubscribed to the player updates");
+            this.observers.Add(obs);
+        }
+
+        public void NotifySubscribers()
+        {
+            foreach (var observer in this.observers)
+            {
+                observer.Update(this);
+            }
         }
     }
 }

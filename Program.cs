@@ -10,15 +10,13 @@ namespace MonopolyQuickConsoleGame
     {
         static void Main(string[] args)
         {
-            Monopoly game = new Monopoly(2);
+            Monopoly game = Monopoly.GetMonopolyGame();
 
+            GameObserver obs = new GameObserver();
+            game.Subscribe(obs);
+
+            game.InitializeGame();
             game.StartGame();
-
-            while (game.PlayNextPlayerTurn())
-            {
-                Console.ReadKey();
-            }
-
         }
     }
 }
