@@ -15,8 +15,7 @@ namespace MonopolyQuickConsoleGame
             GameObserver obs = new GameObserver();
             game.AddSubscriber(obs);
 
-            game.SetPlayersAmount(2);
-            game.InitializeGame();
+            game.InitializeGame(2);
 
             while (!game.GameOver)
             {

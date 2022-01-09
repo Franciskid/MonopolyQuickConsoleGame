@@ -8,14 +8,6 @@ namespace MonopolyQuickConsoleGame
 {
     public class GameObserver : Observer
     {
-        internal Monopoly Monopoly
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
         public override void Update(IObservable game)
         {
             if (!(game is Monopoly monop))

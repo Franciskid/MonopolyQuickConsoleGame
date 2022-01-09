@@ -8,13 +8,6 @@ namespace MonopolyQuickConsoleGame
 {
     public class PlayerObserver : Observer
     {
-        internal Player Player
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public override void Update(IObservable player)
         {
@@ -52,7 +45,7 @@ namespace MonopolyQuickConsoleGame
                     break;
 
                 case PlayerState.Reset:
-                    Console.WriteLine($"{pl.Name} is now being reset.");
+                    Console.WriteLine($"{pl.Name} is now being reinitialized.");
                     break;
             }
         }

@@ -106,7 +106,7 @@ namespace MonopolyQuickConsoleGame
 
         #region Initializing
 
-        public void SetPlayersAmount(int amnt)
+        private void SetPlayersAmount(int amnt)
         {
             if (!this.IsInitialized)
             {
@@ -122,7 +122,7 @@ namespace MonopolyQuickConsoleGame
             }
             else
             {
-                Console.WriteLine("Cannot change the amount of player while the game is already initialized or running. Use ResetGame()");
+                throw new Exception("Cannot change the amount of player while the game is already initialized or running. Use ResetGame()");
             }
         }
 
@@ -130,15 +130,13 @@ namespace MonopolyQuickConsoleGame
         /// Initializes the game
         /// </summary>
         /// <param name="timeBetweenEachTurn">-1 if manual, else game is automatic and this value is the time between each player's turn</param>
-        public void InitializeGame(int timeBetweenEachTurn = -1)
+        public void InitializeGame(int amountPlayers = 2)
         {
-            ResetGame();
+            this.Turn = -1;
 
-            SetPlayersAmount(this.playerAmount);
+            SetPlayersAmount(amountPlayers);
 
             this.State = GameState.GameStarting;
-
-            //PressKey("Press any key to start the game !");
 
             this.Turn = 0; //Game is now initialized
         }
@@ -148,7 +146,6 @@ namespace MonopolyQuickConsoleGame
         /// </summary>
         public void ResetGame()
         {
-            this.Turn = -1;
             this.Players?.ForEach(x => x.Reset());
         }
 
@@ -170,7 +167,6 @@ namespace MonopolyQuickConsoleGame
                 if (Player.ID == 1)
                 {
                     this.Turn++;
-                    //QuickRecap();
                 }
 
                 PressKey("\n\nPress any key to continue to the next player turn !\n");
@@ -198,7 +194,6 @@ namespace MonopolyQuickConsoleGame
             State = GameState.PlayerNextTurn;
 
 
-            int sum = 0;
             if (Player.Prison)
             {
                 Player.RollDices();
@@ -218,12 +213,10 @@ namespace MonopolyQuickConsoleGame
                 {
                     Player.RollDices();
 
-                    sum += Player.LastDice.Total;
+                    Player.Position += Player.LastDice.Total;
 
-                    if (!Player.LastDice.IsSame)
+                    if (!Player.LastDice.IsSame || Player.Prison)
                     {
-                        Player.Position += sum;
-
                         Player.NumberOfDicesSameValue = 0;
 
                         break;
@@ -233,12 +226,6 @@ namespace MonopolyQuickConsoleGame
                         Player.NumberOfDicesSameValue++;
                     }
                 }
-            }
-
-            if (Player.Position == GO_TO_JAIL_POSITION)
-            {
-                Player.State = PlayerState.GoToPrisonPosition;
-                Player.Prison = true;
             }
 
             ++PlayerTurn;

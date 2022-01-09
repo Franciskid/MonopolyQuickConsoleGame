@@ -60,7 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ClassDiagram1.cd" />
+    <None Include="Diagrams\ClassDiagram.cd" />
+    <None Include="Diagrams\CodeMap1.dgml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Diagrams\ClassDiagram.png" />
+    <Content Include="Diagrams\Sequence_diagram_Observer.png" />
+    <Content Include="Diagrams\Sequence_diagram_Singleton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

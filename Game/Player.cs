@@ -21,6 +21,12 @@ namespace MonopolyQuickConsoleGame
                 this.position = value % Monopoly.GAMEBOARD_SIZE;
 
                 this.State = PlayerState.NewPosition;
+
+                if (Position == Monopoly.GO_TO_JAIL_POSITION)
+                {
+                    State = PlayerState.GoToPrisonPosition;
+                    Prison = true;
+                }
             }
         }
 
@@ -120,7 +126,8 @@ namespace MonopolyQuickConsoleGame
         public void Reset()
         {
             this.position = 0;
-            this.Prison = false;
+            this.prisonTurns = 0;
+            this.numberOfDicesSameValue = 0;
             this.LastDice.Reset();
 
             this.State = PlayerState.Reset;
