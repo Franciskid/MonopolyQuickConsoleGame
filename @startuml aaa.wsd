@@ -1,4 +1,0 @@
-@startuml aaa
-User -> Server: ezfdzeadf
-
-@enduml
