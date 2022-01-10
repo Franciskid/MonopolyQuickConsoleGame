@@ -173,7 +173,8 @@ namespace MonopolyQuickConsoleGame
             }
             while (this.NextTurn() && (this.Turn < max || PlayerTurn == Players.Count -1) && this.Turn < this.MaxTurns);
 
-            State = GameState.GameOver;
+            if (this.GameOver)
+                State = GameState.GameOver;
         }
 
         public void UpdateView() => this.view.PrintGameDetails(this);
