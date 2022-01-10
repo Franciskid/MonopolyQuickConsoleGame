@@ -83,12 +83,6 @@ namespace MonopolyQuickConsoleGame
                 if (value != 0)
                 {
                     this.State = PlayerState.DicesSameValues;
-
-                    if (value == Monopoly.MAX_DICE_DOUBLES_BEFORE_PRISON)
-                    {
-                        this.numberOfDicesSameValue = 0;
-                        this.Prison = true;
-                    }
                 }
             }
         }

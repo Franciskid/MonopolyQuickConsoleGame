@@ -171,7 +171,9 @@ namespace MonopolyQuickConsoleGame
 
                 PressKey("\n\nPress any key to continue to the next player turn !\n");
             }
-            while (this.NextTurn() && (this.Turn < max || PlayerTurn == Players.Count -1));
+            while (this.NextTurn() && (this.Turn < max || PlayerTurn == Players.Count -1) && this.Turn < this.MaxTurns);
+
+            State = GameState.GameOver;
         }
 
         public void UpdateView() => this.view.PrintGameDetails(this);
@@ -215,15 +217,16 @@ namespace MonopolyQuickConsoleGame
 
                     Player.Position += Player.LastDice.Total;
 
-                    if (!Player.LastDice.IsSame || Player.Prison)
+                    Player.NumberOfDicesSameValue = !Player.LastDice.IsSame || Player.Prison ? 0 : Player.NumberOfDicesSameValue + 1;
+
+                    if (Player.NumberOfDicesSameValue == MAX_DICE_DOUBLES_BEFORE_PRISON)
                     {
                         Player.NumberOfDicesSameValue = 0;
-
-                        break;
+                        Player.Prison = true;
                     }
-                    else
+                    else if (Player.NumberOfDicesSameValue == 0)
                     {
-                        Player.NumberOfDicesSameValue++;
+                        break;
                     }
                 }
             }
